@@ -3,12 +3,8 @@ import React from "react";
 import { StatusBar } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 
-import firebase from "firebase";
-import { firebaseConfig } from "./firebaseConfig";
-firebase.initializeApp(firebaseConfig);
-
 import { LoginStackNavigator } from "./navigators/LoginStackNavigator/LoginStackNavigator";
-import AddStackNaviagtor from "./navigators/AddStackNavigator/AddStackNavigator";
+import AddListingStackNaviagtor from "./navigators/AddStackNavigator/AddListingStackNavigator";
 
 import { connect } from "react-redux";
 
@@ -28,7 +24,7 @@ function Main(props) {
   return (
     <NavigationContainer theme={MyTheme}>
       <StatusBar barStyle="dark-content" />
-      {props.loggedIn ? <AddStackNaviagtor /> : <LoginStackNavigator />}
+      {props.loggedIn ? <AddListingStackNaviagtor /> : <LoginStackNavigator />}
     </NavigationContainer>
   );
 }

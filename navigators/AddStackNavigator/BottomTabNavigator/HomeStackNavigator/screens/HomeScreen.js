@@ -1,12 +1,14 @@
 import React from "react";
-import { View, Text, Button, FlatList, Image } from "react-native";
+import { View, Text, FlatList } from "react-native";
+import { useSelector } from "react-redux";
+import { useFirestoreConnect } from "react-redux-firebase";
+import { isLoaded, isEmpty } from "react-redux-firebase";
 
 import CardItem from "./components/CardItem";
 
-import { connect } from "react-redux";
-
-function HomeScreen(props) {
-  console.log(props.listing);
+export default function HomeScreen(props) {
+  useFirestoreConnect(["listings"]);
+  const listings = useSelector((state) => state.firestore.data.listings);
 
   const renderItem = ({ item }) => (
     <CardItem
@@ -19,18 +21,20 @@ function HomeScreen(props) {
       }}
     />
   );
+
   return (
     <View style={{ flex: 1 }}>
-      <Button
-        title="Open Modal"
-        onPress={() => props.navigation.navigate("Modal")}
-      />
-      <FlatList data={props.listing} renderItem={renderItem} />
+      {!isLoaded(listings) ? (
+        <Text>Loading... </Text>
+      ) : isEmpty(listings) ? (
+        <Text>No items</Text>
+      ) : (
+        <FlatList
+          data={Object.values(listings)}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.id}
+        />
+      )}
     </View>
   );
 }
-
-const mapStateToProps = (state) => ({
-  listing: state.listing,
-});
-export default connect(mapStateToProps)(HomeScreen);

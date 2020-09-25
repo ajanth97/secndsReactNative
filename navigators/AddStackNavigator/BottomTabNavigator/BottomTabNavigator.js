@@ -47,7 +47,10 @@ export default function BottomTabNavigator({ navigation }) {
         component={AddListing}
         options={{
           tabBarButton: () => (
-            <Button title="Add" onPress={() => navigation.navigate("Modal")} />
+            <Button
+              title="Add Listing"
+              onPress={() => navigation.navigate("Modal")}
+            />
           ),
         }}
       />

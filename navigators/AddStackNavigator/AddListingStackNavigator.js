@@ -1,7 +1,7 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import ModalScreen from "./screens/ModalScreen";
+import AddListingScreen from "./screens/AddListingScreen";
 
 import BottomTabNavigator from "./BottomTabNavigator/BottomTabNavigator";
 
@@ -17,7 +17,7 @@ export default function AddStackNavigator() {
       />
       <AddStack.Screen
         name="Modal"
-        component={ModalScreen}
+        component={AddListingScreen}
         options={{ headerShown: false }}
       />
     </AddStack.Navigator>
