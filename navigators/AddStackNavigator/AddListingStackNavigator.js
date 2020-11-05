@@ -2,6 +2,8 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
 import AddListingScreen from "./screens/AddListingScreen";
+import CameraScreen from "./screens/CameraScreen";
+import PreviewScreen from "./screens/PreviewScreen";
 
 import BottomTabNavigator from "./BottomTabNavigator/BottomTabNavigator";
 
@@ -18,6 +20,16 @@ export default function AddStackNavigator() {
       <AddStack.Screen
         name="Modal"
         component={AddListingScreen}
+        options={{ headerShown: false }}
+      />
+      <AddStack.Screen
+        name="Camera"
+        component={CameraScreen}
+        options={{ headerShown: false }}
+      />
+      <AddStack.Screen
+        name="Preview"
+        component={PreviewScreen}
         options={{ headerShown: false }}
       />
     </AddStack.Navigator>
