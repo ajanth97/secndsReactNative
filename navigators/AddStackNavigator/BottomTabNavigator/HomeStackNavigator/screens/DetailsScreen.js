@@ -1,6 +1,5 @@
 import React from "react";
 import { View, Text, Image, ScrollView } from "react-native";
-import { Content } from "native-base";
 
 function DetailsScreen({ route }) {
   const { title } = route.params;

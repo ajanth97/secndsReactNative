@@ -10,7 +10,6 @@ import {
 } from "react-native";
 import { Button } from "@ui-kitten/components";
 import Constants from "expo-constants";
-import AutoHeightImage from "react-native-auto-height-image";
 
 export default function PreviewScreen({ navigation, route }) {
   const { photo } = route.params;
