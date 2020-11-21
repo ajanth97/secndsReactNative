@@ -67,7 +67,7 @@ export default function ViewProduct({navigation}) {
                 <View>
                     <Text style={styles.categoryScrollTitle}>Similar Items</Text>
                     <ScrollView horizontal={true} style={{marginBottom: 100}}>
-                        <TouchableOpacity onPress={() => navigation.navigate("Home")}>
+                        <TouchableOpacity>
                             <View style={styles.scrollItemContainer}>
                                 <Image style={styles.scrollItemImage} source={require('./assets/6.png')}/>
                                 <Text style={styles.scrollItemBrand}>Ray-ban</Text>
@@ -75,7 +75,7 @@ export default function ViewProduct({navigation}) {
                                 <Text style={styles.scrollItemPrice}>LKR 1,000</Text>
                             </View>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={() => navigation.navigate("Home")}>
+                        <TouchableOpacity>
                             <View style={styles.scrollItemContainer}>
                                 <Image style={styles.scrollItemImage} source={require('./assets/6.png')}/>
                                 <Text style={styles.scrollItemBrand}>Ray-ban</Text>
@@ -83,7 +83,7 @@ export default function ViewProduct({navigation}) {
                                 <Text style={styles.scrollItemPrice}>LKR 1,000</Text>
                             </View>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={() => navigation.navigate("Home")}>
+                        <TouchableOpacity>
                             <View style={styles.scrollItemContainer}>
                                 <Image style={styles.scrollItemImage} source={require('./assets/6.png')}/>
                                 <Text style={styles.scrollItemBrand}>Ray-ban</Text>
