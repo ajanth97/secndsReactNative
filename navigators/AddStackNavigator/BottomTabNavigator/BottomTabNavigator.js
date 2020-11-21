@@ -1,64 +1,64 @@
 import React from "react";
-
-import { Button } from "react-native";
-
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-
-import HomeStackNavigator from "./HomeStackNavigator/HomeStackNavigator";
-import SettingsScreen from "./screens/SettingsScreen";
-
+import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
-const AddListing = () => null;
+import HomeStackNavigator from "./HomeStackNavigator/HomeStackNavigator";
+import MyAccountScreen from "./screens/MyAccountScreen";
+import ModalScreen from "../screens/AddListingScreen";
+import NotificationsScreen from "./screens/NotificationsScreen";
+import SearchScreen from "./screens/SearchScreen";
 
 const Tab = createBottomTabNavigator();
 
-export default function BottomTabNavigator({ navigation }) {
-  return (
-    <Tab.Navigator
-      screenOptions={({ route }) => ({
-        tabBarIcon: ({ focused, color, size }) => {
-          let iconName;
-
-          if (route.name === "Home") {
-            iconName = focused
-              ? "ios-information-circle"
-              : "ios-information-circle-outline";
-          } else if (route.name === "Settings") {
-            iconName = focused ? "ios-list-box" : "ios-list";
-          }
-
-          // You can return any component that you like here!
-          return <Ionicons name={iconName} size={size} color={color} />;
-        },
-      })}
-      tabBarOptions={{
-        activeTintColor: "tomato",
-        inactiveTintColor: "gray",
-      }}
-    >
-      <Tab.Screen
-        name="Home"
-        component={HomeStackNavigator}
-        options={{ tabBarBadge: 5 }}
-      />
-      <Tab.Screen
-        name="Add"
-        component={AddListing}
-        options={{
-          tabBarButton: () => (
-            <Button
-              title="Add Listing"
-              onPress={() => navigation.navigate("Modal")}
+export default function BottomTabNavigator({navigation}) {
+    return (
+        <Tab.Navigator
+            screenOptions={({route}) => ({
+                tabBarIcon: ({focused, color, size}) => {
+                    let iconName;
+                    if (route.name === "Home") {
+                        iconName = focused
+                            ? "ios-home"
+                            : "ios-home";
+                    } else if (route.name === "My Account") {
+                        iconName = focused ? "ios-person" : "ios-person";
+                    } else if (route.name === "Cart") {
+                        iconName = focused ? "ios-cart" : "ios-cart";
+                    } else if (route.name === "Add") {
+                        iconName = focused ? "ios-add-circle" : "ios-add-circle";
+                    } else if (route.name === "Notifications") {
+                        iconName = focused ? "ios-notifications" : "ios-notifications";
+                    } else if (route.name === "Search") {
+                        iconName = focused ? "ios-search" : "ios-search";
+                    }
+                    return <Ionicons name={iconName} size={size} color={color}/>;
+                },
+            })}
+            tabBarOptions={{
+                activeTintColor: "black",
+                inactiveTintColor: "gray",
+            }}
+        >
+            <Tab.Screen
+                name="Home"
+                component={HomeStackNavigator}
             />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="Settings"
-        component={SettingsScreen}
-        options={{ tabBarBadge: 10 }}
-      />
-    </Tab.Navigator>
-  );
+            <Tab.Screen
+                name="Search"
+                component={SearchScreen}
+            />
+            <Tab.Screen
+                name="Add"
+                component={ModalScreen}
+            />
+            <Tab.Screen
+                name="Notifications"
+                component={NotificationsScreen}
+            />
+            <Tab.Screen
+                name="My Account"
+                component={MyAccountScreen}
+            />
+        </Tab.Navigator>
+    );
 }
