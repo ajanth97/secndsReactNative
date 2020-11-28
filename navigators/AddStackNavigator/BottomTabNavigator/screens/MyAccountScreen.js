@@ -1,5 +1,5 @@
 import React from "react";
-import {View, Text, Image, StyleSheet} from "react-native";
+import {View, Text, Image, StyleSheet, ScrollView} from "react-native";
 import {Avatar, Card, ListItem, Icon, Button} from "react-native-elements";
 
 function MyAccountScreen({navigation}) {
@@ -18,6 +18,7 @@ function MyAccountScreen({navigation}) {
     ];
 
     return (
+        <ScrollView>
         <View style={{flex: 1, alignItems: "center", marginTop: 50}}>
             {/*Profile Picture, Name, Membership Type*/}
             <View style={{flexDirection: "row"}}>
@@ -117,7 +118,9 @@ function MyAccountScreen({navigation}) {
             <Image style={{marginTop: 30, width: 100, height: 20}}
                    source={require('../HomeStackNavigator/screens/assets/homeLogo.png')}/>
             <Text style={{marginTop: 5, fontSize: 10}}>©2020 Secnds.com</Text>
+
         </View>
+</ScrollView>
     );
 }
 
