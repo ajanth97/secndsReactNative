@@ -5,6 +5,7 @@ import ImageSlider from 'react-native-image-slider';
 
 function NewHomeScreen({navigation}) {
     const windowHeight = Dimensions.get('window').height;
+    const windowWidth = Dimensions.get('window').width;
     const images = [
         "https://digistatement.com/wp-content/uploads/2020/03/rsz_new-apple-macbook-pro-2020-700x375.jpg",
         "https://cdn.pocket-lint.com/r/s/970x/assets/images/152137-laptops-review-apple-macbook-pro-2020-review-image1-pbzm4ejvvs-jpg.webp",
@@ -15,7 +16,7 @@ function NewHomeScreen({navigation}) {
     return (
         <View style={{backgroundColor: "#F6F7F7", paddingTop: 50, height: windowHeight}}>
             <ScrollView style={{backgroundColor: "#F6F7F7"}}>
-                <View style={{flex: 1, alignItems: "center", backgroundColor: "#F6F7F7"}}>
+                <View style={{flex: 1, alignItems: "center", backgroundColor: "#F6F7F7", paddingBottom: 100}}>
                     <Image style={{width: 240, height: 50}} source={require('./assets/homeLogo.png')}/>
 
                     <View style={styles.sliderContainer}>
@@ -43,12 +44,18 @@ function NewHomeScreen({navigation}) {
                                     <Text style={styles.recommendedPriceText}>LKR 2000</Text>
                                 </View>
                             </TouchableOpacity>
+                            <TouchableOpacity onPress={() => navigation.navigate("Home")}>
+                                <Image style={styles.recommendedImage} source={require('./assets/6.png')}/>
+                                <View style={styles.recommendedPriceLabelView}>
+                                    <Text style={styles.recommendedPriceText}>LKR 2000</Text>
+                                </View>
+                            </TouchableOpacity>
                         </ScrollView>
                     </View>
                     <View style={{width: "100%", flex: 1, backgroundColor: "#F6F7F7", paddingBottom: 10}}>
                         <Text style={styles.categoryTitle}>
                             Deals in Electronics</Text>
-                        <View style={{width: "100%", flexDirection: "row", marginHorizontal: 20}}>
+                        <View style={{flexDirection: "row", marginHorizontal: 10}}>
                             <Badge value={<Text style={styles.dealCategoryName}>Mobile</Text>}
                                    badgeStyle={styles.dealCategory}/>
                             <Badge containerStyle={styles.dealCategoryContainer}
@@ -88,13 +95,21 @@ function NewHomeScreen({navigation}) {
                                     <Text style={styles.dealPrice}>LKR 1,000</Text>
                                 </View>
                             </TouchableOpacity>
+                            <TouchableOpacity onPress={() => navigation.navigate("Home")}>
+                                <View style={styles.dealContainer}>
+                                    <Image style={styles.dealImage} source={require('./assets/6.png')}/>
+                                    <Text style={styles.dealBrand}>Ray-ban</Text>
+                                    <Text style={styles.dealItemName}>Sunglass </Text>
+                                    <Text style={styles.dealPrice}>LKR 1,000</Text>
+                                </View>
+                            </TouchableOpacity>
                         </ScrollView>
                     </View>
 
                     <View style={{width: "100%", flex: 1, backgroundColor: "#F6F7F7", paddingBottom: 10}}>
                         <Text style={styles.categoryTitle}>
                             Deals in Furniture</Text>
-                        <View style={{width: "100%", flexDirection: "row", marginHorizontal: 20}}>
+                        <View style={{width: "100%", flexDirection: "row", marginHorizontal: 10}}>
                             <Badge value={<Text style={styles.dealCategoryName}>Mobile</Text>}
                                    badgeStyle={styles.dealCategory}/>
                             <Badge containerStyle={styles.dealCategoryContainer}
@@ -157,8 +172,8 @@ const styles = StyleSheet.create({
         color: "black"
     },
     dealImage: {
-        width: 125,
-        height: 110,
+        width: 110,
+        height: 80,
         borderRadius: 5,
         borderBottomRightRadius: 0,
         borderBottomLeftRadius: 0,
@@ -171,7 +186,7 @@ const styles = StyleSheet.create({
         fontSize: 12
     },
     dealContainer: {
-        marginLeft: 10,
+        marginLeft: 11,
         marginBottom: 10,
         marginTop: 10,
         alignItems: "center",
@@ -190,8 +205,8 @@ const styles = StyleSheet.create({
     },
     dealCategory: {
         backgroundColor: "lightgrey",
-        paddingVertical: 5,
-        paddingHorizontal: 8,
+        paddingVertical: 3,
+        paddingHorizontal: 6,
         height: 30
     },
     dealCategoryName: {
@@ -199,23 +214,24 @@ const styles = StyleSheet.create({
     },
     dealCategorySeeAll: {
         marginTop: 5,
-        marginLeft: 48,
+        marginLeft: 30,
         fontSize: 15,
-        color: "#676767"
+        color: "#676767",
+        right: 0
     },
     dealCategoryContainer: {
-        marginLeft: 10
+        marginLeft: 5
     },
     recommendedImage: {
-        width: 125,
-        height: 110,
+        width: 110,
+        height: 80,
         borderRadius: 5,
         shadowOpacity: 1,
         marginHorizontal: 5
     },
     recommendedPriceLabelView: {
-        top: -22,
-        left: 10,
+        top: -18,
+        left: 9,
         backgroundColor: "black",
         width: 75,
         opacity: 0.7
