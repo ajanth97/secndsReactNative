@@ -14,7 +14,6 @@ export default function ViewProduct({navigation}) {
 
     return (
         <View style={{backgroundColor: "#F6F7F7", height: windowHeight}}>
-
             <ScrollView style={{backgroundColor: "#F6F7F7"}}>
                 <View style={{flex: 1, alignItems: "center", backgroundColor: "#F6F7F7"}}>
                     <View style={styles.imageSlider}>
@@ -66,7 +65,7 @@ export default function ViewProduct({navigation}) {
 
                 <View>
                     <Text style={styles.categoryScrollTitle}>Similar Items</Text>
-                    <ScrollView horizontal={true} style={{marginBottom: 100}}>
+                    <ScrollView horizontal={true}>
                         <TouchableOpacity>
                             <View style={styles.scrollItemContainer}>
                                 <Image style={styles.scrollItemImage} source={require('./assets/6.png')}/>
@@ -156,8 +155,8 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.2
     },
     scrollItemImage: {
-        width: 125,
-        height: 110,
+        width: 110,
+        height: 80,
         borderRadius: 5,
         borderBottomRightRadius: 0,
         borderBottomLeftRadius: 0,
