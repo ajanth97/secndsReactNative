@@ -1,7 +1,25 @@
 import React from "react";
-import {ScrollView, TouchableOpacity, StyleSheet, Image, View, Text, Dimensions} from "react-native";
+import {ScrollView, StyleSheet, Image, View, Text, Dimensions} from "react-native";
 import {Badge} from 'react-native-elements';
 import ImageSlider from 'react-native-image-slider';
+import SmallProductCard from "../../../components/SmallProductCard";
+import ProductCard from "../../../components/ProductCard";
+
+const recommendedArr = [
+    {url: require("./assets/6.png"), price: "1100"},
+    {url: require("./assets/6.png"), price: "1200"},
+    {url: require("./assets/6.png"), price: "1300"},
+    {url: require("./assets/6.png"), price: "1400"},
+    {url: require("./assets/6.png"), price: "1500"}
+];
+
+const electronicsArr = [
+    {url: require("./assets/6.png"), price: "1000", brand: "Ray-ban", name: "Sunglass"},
+    {url: require("./assets/6.png"), price: "1100", brand: "Ray-ban", name: "Sunglass"},
+    {url: require("./assets/6.png"), price: "1200", brand: "Ray-ban", name: "Sunglass"},
+    {url: require("./assets/6.png"), price: "1300", brand: "Ray-ban", name: "Sunglass"},
+    {url: require("./assets/6.png"), price: "1400", brand: "Ray-ban", name: "Sunglass"}
+];
 
 function NewHomeScreen({navigation}) {
     const windowHeight = Dimensions.get('window').height;
@@ -26,30 +44,15 @@ function NewHomeScreen({navigation}) {
                     <View style={{width: "100%", flex: 1, backgroundColor: "#F6F7F7", paddingBottom: 10}}>
                         <Text style={styles.categoryTitle}>Recommended for you</Text>
                         <ScrollView horizontal={true} style={{marginHorizontal: 5}}>
-                            <TouchableOpacity onPress={() => navigation.navigate("Product")}>
-                                <Image style={styles.recommendedImage} source={require('./assets/6.png')}/>
-                                <View style={styles.recommendedPriceLabelView}>
-                                    <Text style={styles.recommendedPriceText}>LKR 2000</Text>
-                                </View>
-                            </TouchableOpacity>
-                            <TouchableOpacity onPress={() => navigation.navigate("Home")}>
-                                <Image style={styles.recommendedImage} source={require('./assets/6.png')}/>
-                                <View style={styles.recommendedPriceLabelView}>
-                                    <Text style={styles.recommendedPriceText}>LKR 2000</Text>
-                                </View>
-                            </TouchableOpacity>
-                            <TouchableOpacity onPress={() => navigation.navigate("Home")}>
-                                <Image style={styles.recommendedImage} source={require('./assets/6.png')}/>
-                                <View style={styles.recommendedPriceLabelView}>
-                                    <Text style={styles.recommendedPriceText}>LKR 2000</Text>
-                                </View>
-                            </TouchableOpacity>
-                            <TouchableOpacity onPress={() => navigation.navigate("Home")}>
-                                <Image style={styles.recommendedImage} source={require('./assets/6.png')}/>
-                                <View style={styles.recommendedPriceLabelView}>
-                                    <Text style={styles.recommendedPriceText}>LKR 2000</Text>
-                                </View>
-                            </TouchableOpacity>
+                            {
+                                recommendedArr.map((item, i) => (
+                                    <SmallProductCard
+                                        key={i}
+                                        navigation={navigation}
+                                        product={item}
+                                    />
+                                ))
+                            }
                         </ScrollView>
                     </View>
                     <View style={{width: "100%", flex: 1, backgroundColor: "#F6F7F7", paddingBottom: 10}}>
@@ -71,38 +74,15 @@ function NewHomeScreen({navigation}) {
                         </View>
 
                         <ScrollView horizontal={true} style={{marginTop: 10}}>
-                            <TouchableOpacity onPress={() => navigation.navigate("Home")}>
-                                <View style={styles.dealContainer}>
-                                    <Image style={styles.dealImage} source={require('./assets/6.png')}/>
-                                    <Text style={styles.dealBrand}>Ray-ban</Text>
-                                    <Text style={styles.dealItemName}>Sunglass </Text>
-                                    <Text style={styles.dealPrice}>LKR 1,000</Text>
-                                </View>
-                            </TouchableOpacity>
-                            <TouchableOpacity onPress={() => navigation.navigate("Home")}>
-                                <View style={styles.dealContainer}>
-                                    <Image style={styles.dealImage} source={require('./assets/6.png')}/>
-                                    <Text style={styles.dealBrand}>Ray-ban</Text>
-                                    <Text style={styles.dealItemName}>Sunglass </Text>
-                                    <Text style={styles.dealPrice}>LKR 1,000</Text>
-                                </View>
-                            </TouchableOpacity>
-                            <TouchableOpacity onPress={() => navigation.navigate("Home")}>
-                                <View style={styles.dealContainer}>
-                                    <Image style={styles.dealImage} source={require('./assets/6.png')}/>
-                                    <Text style={styles.dealBrand}>Ray-ban</Text>
-                                    <Text style={styles.dealItemName}>Sunglass </Text>
-                                    <Text style={styles.dealPrice}>LKR 1,000</Text>
-                                </View>
-                            </TouchableOpacity>
-                            <TouchableOpacity onPress={() => navigation.navigate("Home")}>
-                                <View style={styles.dealContainer}>
-                                    <Image style={styles.dealImage} source={require('./assets/6.png')}/>
-                                    <Text style={styles.dealBrand}>Ray-ban</Text>
-                                    <Text style={styles.dealItemName}>Sunglass </Text>
-                                    <Text style={styles.dealPrice}>LKR 1,000</Text>
-                                </View>
-                            </TouchableOpacity>
+                            {
+                                electronicsArr.map((item, i) => (
+                                    <ProductCard
+                                        key={i}
+                                        navigation={navigation}
+                                        product={item}
+                                    />
+                                ))
+                            }
                         </ScrollView>
                     </View>
 
@@ -125,30 +105,15 @@ function NewHomeScreen({navigation}) {
                         </View>
 
                         <ScrollView horizontal={true} style={{marginTop: 10}}>
-                            <TouchableOpacity onPress={() => navigation.navigate("Home")}>
-                                <View style={styles.dealContainer}>
-                                    <Image style={styles.dealImage} source={require('./assets/6.png')}/>
-                                    <Text style={styles.dealBrand}>Ray-ban</Text>
-                                    <Text style={styles.dealItemName}>Sunglass </Text>
-                                    <Text style={styles.dealPrice}>LKR 1,000</Text>
-                                </View>
-                            </TouchableOpacity>
-                            <TouchableOpacity onPress={() => navigation.navigate("Home")}>
-                                <View style={styles.dealContainer}>
-                                    <Image style={styles.dealImage} source={require('./assets/6.png')}/>
-                                    <Text style={styles.dealBrand}>Ray-ban</Text>
-                                    <Text style={styles.dealItemName}>Sunglass </Text>
-                                    <Text style={styles.dealPrice}>LKR 1,000</Text>
-                                </View>
-                            </TouchableOpacity>
-                            <TouchableOpacity onPress={() => navigation.navigate("Home")}>
-                                <View style={styles.dealContainer}>
-                                    <Image style={styles.dealImage} source={require('./assets/6.png')}/>
-                                    <Text style={styles.dealBrand}>Ray-ban</Text>
-                                    <Text style={styles.dealItemName}>Sunglass </Text>
-                                    <Text style={styles.dealPrice}>LKR 1,000</Text>
-                                </View>
-                            </TouchableOpacity>
+                            {
+                                electronicsArr.map((item, i) => (
+                                    <ProductCard
+                                        key={i}
+                                        navigation={navigation}
+                                        product={item}
+                                    />
+                                ))
+                            }
                         </ScrollView>
                     </View>
                 </View>
