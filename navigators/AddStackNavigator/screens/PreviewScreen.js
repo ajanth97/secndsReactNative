@@ -43,11 +43,3 @@ export default function PreviewScreen({navigation, route}) {
         </View>
     );
 }
-
-const formStyling = StyleSheet.create({
-    layoutPadding: {
-        paddingTop: Constants.statusBarHeight + 10,
-        paddingLeft: 10,
-        paddingRight: 10,
-    },
-});
