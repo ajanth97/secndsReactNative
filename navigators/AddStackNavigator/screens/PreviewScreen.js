@@ -1,7 +1,6 @@
 import React from "react";
-import {View, StyleSheet, ImageBackground, Dimensions} from "react-native";
+import {View, ImageBackground, Dimensions} from "react-native";
 import {Button} from "@ui-kitten/components";
-import Constants from "expo-constants";
 import {Avatar} from "react-native-elements";
 
 export default function PreviewScreen({navigation, route}) {
