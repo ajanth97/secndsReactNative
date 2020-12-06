@@ -25,8 +25,8 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.2
     },
     categoryImage: {
-        width: 170,
-        height: 120,
+        width: 120,
+        height: 90,
         borderRadius: 5,
         borderBottomLeftRadius: 0,
         borderBottomRightRadius: 0,

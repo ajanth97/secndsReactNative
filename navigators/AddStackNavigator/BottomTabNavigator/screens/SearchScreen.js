@@ -53,6 +53,18 @@ function SearchScreen({navigation}) {
                             ))
                         }
                     </ScrollView>
+                    <Text style={styles.categoryTitle}>Top Sellers</Text>
+                    <ScrollView horizontal={true} style={styles.horizontalScrollView}>
+                        {
+                            categoryArr.map((item, i) => (
+                                <CategoryCard
+                                    key={i}
+                                    navigation={navigation}
+                                    category={item}
+                                />
+                            ))
+                        }
+                    </ScrollView>
 
 
                 </View>
