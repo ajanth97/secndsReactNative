@@ -1,5 +1,10 @@
 import React from "react";
 import {ScrollView, StyleSheet, Image, View, Text, Dimensions} from "react-native";
+
+import { useSelector } from "react-redux";
+import { useFirestoreConnect } from "react-redux-firebase";
+import { isLoaded, isEmpty } from "react-redux-firebase";
+
 import {Badge} from 'react-native-elements';
 import ImageSlider from 'react-native-image-slider';
 import SmallProductCard from "../../../components/SmallProductCard";
@@ -21,7 +26,10 @@ const electronicsArr = [
     {url: require("./assets/6.png"), price: "1400", brand: "Ray-ban", name: "Sunglass"}
 ];
 
-function NewHomeScreen({navigation}) {
+function NewHomeScreen({navigation}) {      
+    useFirestoreConnect(["listings"]);
+    const listings = useSelector((state) => state.firestore.data.listings);
+
     const windowHeight = Dimensions.get('window').height;
     const windowWidth = Dimensions.get('window').width;
     const images = [
@@ -32,16 +40,26 @@ function NewHomeScreen({navigation}) {
     ];
 
     return (
-        <View style={{backgroundColor: "#F6F7F7", paddingTop: 50, height: windowHeight}}>
+        <View style={{backgroundColor: "#F6F7F7", paddingTop: 50, height: windowHeight}}>            
+            <View style={{flex: 1, alignItems: "center", backgroundColor: "#F6F7F7", paddingBottom: 50}}>
+                <Image style={{width: 240, height: 50}} source={require('./assets/homeLogo.png')}/>
+            </View>
             <ScrollView style={{backgroundColor: "#F6F7F7"}}>
-                <View style={{flex: 1, alignItems: "center", backgroundColor: "#F6F7F7", paddingBottom: 100}}>
-                    <Image style={{width: 240, height: 50}} source={require('./assets/homeLogo.png')}/>
-
+            {!isLoaded(listings) ? (
+                <Text>Loading... </Text>
+                
+             )  
+             
+             : isEmpty(listings) ? (
+                 <Text>No items</Text>
+            ) : (                
+                <View style={{flex: 1, alignItems: "center", backgroundColor: "#F6F7F7", paddingBottom: 100}}>                    
                     <View style={styles.sliderContainer}>
                         <ImageSlider images={images}/>
                     </View>
 
                     <View style={{width: "100%", flex: 1, backgroundColor: "#F6F7F7", paddingBottom: 10}}>
+                        
                         <Text style={styles.categoryTitle}>Recommended for you</Text>
                         <ScrollView horizontal={true} style={{marginHorizontal: 5}}>
                             {
@@ -72,12 +90,13 @@ function NewHomeScreen({navigation}) {
                                    badgeStyle={styles.dealCategory}/>
                             <Text style={styles.dealCategorySeeAll}>See All</Text>
                         </View>
-
+                            
                         <ScrollView horizontal={true} style={{marginTop: 10}}>
                             {
-                                electronicsArr.map((item, i) => (
+                                
+                                Object.values(listings).map((item) =>(
                                     <ProductCard
-                                        key={i}
+                                        key={item.id}
                                         navigation={navigation}
                                         product={item}
                                     />
@@ -116,7 +135,7 @@ function NewHomeScreen({navigation}) {
                             }
                         </ScrollView>
                     </View>
-                </View>
+                </View>)}
             </ScrollView>
         </View>
     );
