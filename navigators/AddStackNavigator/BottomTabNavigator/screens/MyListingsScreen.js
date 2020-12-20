@@ -73,8 +73,8 @@ function MyListingsScreen({navigation}) {
                                     </View>
                                     <Button type="outline" title={"REMOVE LISTING"}
                                             buttonStyle={{borderColor: "red", borderWidth:1}}
-                                            titleStyle={{color: "red", fontSize: 14}}
-                                            containerStyle={{marginTop: 30, width: 200, alignSelf:"center"}}
+                                            titleStyle={{color: "red", fontSize: 12}}
+                                            containerStyle={{marginTop: 10, width: 200, height:30, alignSelf:"center"}}
                                     />
                                 </ListItem.Content>
 
