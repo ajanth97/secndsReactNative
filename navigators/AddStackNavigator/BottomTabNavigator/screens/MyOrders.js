@@ -1,5 +1,5 @@
 import React from "react";
-import {ListItem} from 'react-native-elements'
+import {Icon, ListItem} from 'react-native-elements'
 import {View, Text, ScrollView, Dimensions, Image} from "react-native";
 
 const screenHeight = Dimensions.get('window').height;
@@ -71,7 +71,7 @@ function MyOrdersScreen({navigation}) {
                                         </View>
                                     </View>
                                 </ListItem.Content>
-
+                                <Icon name="delete" color={"red"}/>
                             </ListItem>
                         ))
                     }
