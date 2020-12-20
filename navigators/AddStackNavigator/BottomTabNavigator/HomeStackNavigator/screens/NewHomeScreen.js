@@ -1,10 +1,7 @@
 import React from "react";
 import {ScrollView, StyleSheet, Image, View, Text, Dimensions} from "react-native";
-
-import { useSelector } from "react-redux";
-import { useFirestoreConnect } from "react-redux-firebase";
-import { isLoaded, isEmpty } from "react-redux-firebase";
-
+import {useSelector} from "react-redux";
+import {useFirestoreConnect, isLoaded, isEmpty} from "react-redux-firebase";
 import {Badge} from 'react-native-elements';
 import ImageSlider from 'react-native-image-slider';
 import SmallProductCard from "../../../components/SmallProductCard";
@@ -26,12 +23,13 @@ const electronicsArr = [
     {url: require("./assets/6.png"), price: "1400", brand: "Ray-ban", name: "Sunglass"}
 ];
 
-function NewHomeScreen({navigation}) {      
+function NewHomeScreen({navigation}) {
     useFirestoreConnect(["listings"]);
     const listings = useSelector((state) => state.firestore.data.listings);
 
     const windowHeight = Dimensions.get('window').height;
     const windowWidth = Dimensions.get('window').width;
+
     const images = [
         "https://digistatement.com/wp-content/uploads/2020/03/rsz_new-apple-macbook-pro-2020-700x375.jpg",
         "https://cdn.pocket-lint.com/r/s/970x/assets/images/152137-laptops-review-apple-macbook-pro-2020-review-image1-pbzm4ejvvs-jpg.webp",
@@ -40,102 +38,101 @@ function NewHomeScreen({navigation}) {
     ];
 
     return (
-        <View style={{backgroundColor: "#F6F7F7", paddingTop: 50, height: windowHeight}}>            
+        <View style={{backgroundColor: "#F6F7F7", paddingTop: 50, height: windowHeight}}>
             <View style={{flex: 1, alignItems: "center", backgroundColor: "#F6F7F7", paddingBottom: 50}}>
                 <Image style={{width: 240, height: 50}} source={require('./assets/homeLogo.png')}/>
             </View>
             <ScrollView style={{backgroundColor: "#F6F7F7"}}>
-            {!isLoaded(listings) ? (
-                <Text>Loading... </Text>
-                
-             )  
-             
-             : isEmpty(listings) ? (
-                 <Text>No items</Text>
-            ) : (                
-                <View style={{flex: 1, alignItems: "center", backgroundColor: "#F6F7F7", paddingBottom: 100}}>                    
-                    <View style={styles.sliderContainer}>
-                        <ImageSlider images={images}/>
-                    </View>
+                {!isLoaded(listings) ? (
+                        <Text>Loading... </Text>
 
-                    <View style={{width: "100%", flex: 1, backgroundColor: "#F6F7F7", paddingBottom: 10}}>
-                        
-                        <Text style={styles.categoryTitle}>Recommended for you</Text>
-                        <ScrollView horizontal={true} style={{marginHorizontal: 5}}>
-                            {
-                                recommendedArr.map((item, i) => (
-                                    <SmallProductCard
-                                        key={i}
-                                        navigation={navigation}
-                                        product={item}
-                                    />
-                                ))
-                            }
-                        </ScrollView>
-                    </View>
-                    <View style={{width: "100%", flex: 1, backgroundColor: "#F6F7F7", paddingBottom: 10}}>
-                        <Text style={styles.categoryTitle}>
-                            Deals in Electronics</Text>
-                        <View style={{flexDirection: "row", marginHorizontal: 10}}>
-                            <Badge value={<Text style={styles.dealCategoryName}>Mobile</Text>}
-                                   badgeStyle={styles.dealCategory}/>
-                            <Badge containerStyle={styles.dealCategoryContainer}
-                                   value={<Text style={styles.dealCategoryName}>TV</Text>}
-                                   badgeStyle={styles.dealCategory}/>
-                            <Badge containerStyle={styles.dealCategoryContainer}
-                                   value={<Text style={styles.dealCategoryName}>Computer</Text>}
-                                   badgeStyle={styles.dealCategory}/>
-                            <Badge containerStyle={styles.dealCategoryContainer}
-                                   value={<Text style={styles.dealCategoryName}>Gaming</Text>}
-                                   badgeStyle={styles.dealCategory}/>
-                            <Text style={styles.dealCategorySeeAll}>See All</Text>
-                        </View>
-                            
-                        <ScrollView horizontal={true} style={{marginTop: 10}}>
-                            {
-                                
-                                Object.values(listings).map((item) =>(
-                                    <ProductCard
-                                        key={item.id}
-                                        navigation={navigation}
-                                        product={item}
-                                    />
-                                ))
-                            }
-                        </ScrollView>
-                    </View>
+                    )
 
-                    <View style={{width: "100%", flex: 1, backgroundColor: "#F6F7F7", paddingBottom: 10}}>
-                        <Text style={styles.categoryTitle}>
-                            Deals in Furniture</Text>
-                        <View style={{width: "100%", flexDirection: "row", marginHorizontal: 10}}>
-                            <Badge value={<Text style={styles.dealCategoryName}>Mobile</Text>}
-                                   badgeStyle={styles.dealCategory}/>
-                            <Badge containerStyle={styles.dealCategoryContainer}
-                                   value={<Text style={styles.dealCategoryName}>TV</Text>}
-                                   badgeStyle={styles.dealCategory}/>
-                            <Badge containerStyle={styles.dealCategoryContainer}
-                                   value={<Text style={styles.dealCategoryName}>Computer</Text>}
-                                   badgeStyle={styles.dealCategory}/>
-                            <Badge containerStyle={styles.dealCategoryContainer}
-                                   value={<Text style={styles.dealCategoryName}>Gaming</Text>}
-                                   badgeStyle={styles.dealCategory}/>
-                            <Text style={styles.dealCategorySeeAll}>See All</Text>
-                        </View>
+                    : isEmpty(listings) ? (
+                        <Text>No items</Text>
+                    ) : (
+                        <View style={{flex: 1, alignItems: "center", backgroundColor: "#F6F7F7", paddingBottom: 100}}>
+                            <View style={styles.sliderContainer}>
+                                <ImageSlider images={images}/>
+                            </View>
 
-                        <ScrollView horizontal={true} style={{marginTop: 10}}>
-                            {
-                                electronicsArr.map((item, i) => (
-                                    <ProductCard
-                                        key={i}
-                                        navigation={navigation}
-                                        product={item}
-                                    />
-                                ))
-                            }
-                        </ScrollView>
-                    </View>
-                </View>)}
+                            <View style={{width: "100%", flex: 1, backgroundColor: "#F6F7F7", paddingBottom: 10}}>
+                                <Text style={styles.categoryTitle}>Recommended for you</Text>
+                                <ScrollView horizontal={true} style={{marginHorizontal: 5}}>
+                                    {
+                                        recommendedArr.map((item, i) => (
+                                            <SmallProductCard
+                                                key={i}
+                                                navigation={navigation}
+                                                product={item}
+                                            />
+                                        ))
+                                    }
+                                </ScrollView>
+                            </View>
+                            <View style={{width: "100%", flex: 1, backgroundColor: "#F6F7F7", paddingBottom: 10}}>
+                                <Text style={styles.categoryTitle}>
+                                    Deals in Electronics</Text>
+                                <View style={{flexDirection: "row", marginHorizontal: 10}}>
+                                    <Badge value={<Text style={styles.dealCategoryName}>Mobile</Text>}
+                                           badgeStyle={styles.dealCategory}/>
+                                    <Badge containerStyle={styles.dealCategoryContainer}
+                                           value={<Text style={styles.dealCategoryName}>TV</Text>}
+                                           badgeStyle={styles.dealCategory}/>
+                                    <Badge containerStyle={styles.dealCategoryContainer}
+                                           value={<Text style={styles.dealCategoryName}>Computer</Text>}
+                                           badgeStyle={styles.dealCategory}/>
+                                    <Badge containerStyle={styles.dealCategoryContainer}
+                                           value={<Text style={styles.dealCategoryName}>Gaming</Text>}
+                                           badgeStyle={styles.dealCategory}/>
+                                    <Text style={styles.dealCategorySeeAll}>See All</Text>
+                                </View>
+
+                                <ScrollView horizontal={true} style={{marginTop: 10}}>
+                                    {
+
+                                        Object.values(listings).map((item) => (
+                                            <ProductCard
+                                                key={item.id}
+                                                navigation={navigation}
+                                                product={item}
+                                            />
+                                        ))
+                                    }
+                                </ScrollView>
+                            </View>
+
+                            <View style={{width: "100%", flex: 1, backgroundColor: "#F6F7F7", paddingBottom: 10}}>
+                                <Text style={styles.categoryTitle}>
+                                    Deals in Furniture</Text>
+                                <View style={{width: "100%", flexDirection: "row", marginHorizontal: 10}}>
+                                    <Badge value={<Text style={styles.dealCategoryName}>Mobile</Text>}
+                                           badgeStyle={styles.dealCategory}/>
+                                    <Badge containerStyle={styles.dealCategoryContainer}
+                                           value={<Text style={styles.dealCategoryName}>TV</Text>}
+                                           badgeStyle={styles.dealCategory}/>
+                                    <Badge containerStyle={styles.dealCategoryContainer}
+                                           value={<Text style={styles.dealCategoryName}>Computer</Text>}
+                                           badgeStyle={styles.dealCategory}/>
+                                    <Badge containerStyle={styles.dealCategoryContainer}
+                                           value={<Text style={styles.dealCategoryName}>Gaming</Text>}
+                                           badgeStyle={styles.dealCategory}/>
+                                    <Text style={styles.dealCategorySeeAll}>See All</Text>
+                                </View>
+
+                                <ScrollView horizontal={true} style={{marginTop: 10}}>
+                                    {
+                                        electronicsArr.map((item, i) => (
+                                            <ProductCard
+                                                key={i}
+                                                navigation={navigation}
+                                                product={item}
+                                            />
+                                        ))
+                                    }
+                                </ScrollView>
+                            </View>
+                        </View>)}
             </ScrollView>
         </View>
     );
