@@ -1,8 +1,13 @@
 import React from "react";
-import {View, Text, Image, StyleSheet, ScrollView} from "react-native";
-import {Avatar, Card, ListItem, Icon, Button} from "react-native-elements";
+import {View, Text, Image, StyleSheet, ScrollView, Dimensions} from "react-native";
+import {Avatar, Card, ListItem, Icon, Input, Button, Overlay} from "react-native-elements";
 
 function MyAccountScreen({navigation}) {
+    const [isOverlayVisible, setIsOverlayVisible] = React.useState(false);
+    const [currentOverlay, setCurrentOverlay] = React.useState("");
+    const toggleOverlay = () => {
+        setIsOverlayVisible(!isOverlayVisible);
+    };
     const list = [
         {title: 'Shipping Address', icon: 'local-shipping'},
         {title: 'Payment', icon: 'payment'},
@@ -16,6 +21,73 @@ function MyAccountScreen({navigation}) {
         {title: 'Privacy Policy'},
         {title: 'Legal Information'}
     ];
+    const screenHeight = Dimensions.get('window').height;
+    const screenWidth = Dimensions.get('window').width;
+
+    function returnCurrentOverlayView() {
+        switch (currentOverlay) {
+            case "Shipping Address":
+                return (
+                    <View>
+                        <Text style={{alignSelf:"center", fontSize:16}}>{currentOverlay}</Text>
+                        <Input
+                            placeholder="Enter your Address"
+                            leftIcon={{ type: 'font-awesome', name: 'map-marker' }}
+                            containerStyle={{marginTop:20}}
+                        />
+                        <Button type="outline" title={"SAVE"}
+                                buttonStyle={{borderColor: "green", borderWidth:1}}
+                                titleStyle={{color: "green"}}
+                                containerStyle={{marginTop: 30, width: 150, alignSelf:"center"}}
+                        />
+                    </View>
+                );
+            case "Payment":
+                return (
+                    <View>
+                        <Text style={{alignSelf:"center"}}>{currentOverlay}</Text>
+                    </View>
+                );
+            case "Settings":
+                return (
+                    <View>
+                        <Text style={{alignSelf:"center"}}>{currentOverlay}</Text>
+                    </View>
+                );
+            case "Report Issue":
+                return (
+                    <View>
+                        <Text style={{alignSelf:"center"}}>{currentOverlay}</Text>
+                    </View>
+                );
+            case "Rate Secnds":
+                return (
+                    <View>
+                        <Text style={{alignSelf:"center"}}>{currentOverlay}</Text>
+                    </View>
+                );
+            case "Frequently Asked Questions":
+                return (
+                    <View>
+                        <Text style={{alignSelf:"center"}}>{currentOverlay}</Text>
+                    </View>
+                );
+            case "Privacy Policy":
+                return (
+                    <View>
+                        <Text style={{alignSelf:"center"}}>{currentOverlay}</Text>
+                    </View>
+                );
+            case "Legal Information":
+                return (
+                    <View>
+                        <Text style={{alignSelf:"center"}}>{currentOverlay}</Text>
+                    </View>
+                );
+        }
+    }
+
+    const overlayViewElement = returnCurrentOverlayView();
 
     return (
         <ScrollView>
@@ -42,6 +114,7 @@ function MyAccountScreen({navigation}) {
                             icon={{name: 'history', type: 'font-awesome', color: "black"}}
                             activeOpacity={0.7}
                             containerStyle={styles.avatarContainerStyle}
+                            onPress={() => navigation.navigate("My Orders")}
                         />
                         <Text style={styles.topAvatarButtonText}>My Orders</Text>
                     </View>
@@ -52,6 +125,7 @@ function MyAccountScreen({navigation}) {
                             icon={{name: 'list', type: 'font-awesome', color: "black"}}
                             activeOpacity={0.7}
                             containerStyle={styles.avatarContainerStyle}
+                            onPress={() => navigation.navigate("My Listings")}
                         />
                         <Text style={styles.topAvatarButtonText}>My Listings</Text>
                     </View>
@@ -62,6 +136,7 @@ function MyAccountScreen({navigation}) {
                             icon={{name: 'heart', type: 'font-awesome', color: "black"}}
                             activeOpacity={0.7}
                             containerStyle={styles.avatarContainerStyle}
+                            onPress={() => navigation.navigate("Favourites")}
                         />
                         <Text style={styles.topAvatarButtonText}>Favourites</Text>
                     </View>
@@ -72,6 +147,7 @@ function MyAccountScreen({navigation}) {
                             icon={{name: 'star', type: 'font-awesome', color: "black"}}
                             activeOpacity={0.7}
                             containerStyle={styles.avatarContainerStyle}
+                            onPress={() => navigation.navigate("My Interests")}
                         />
                         <Text style={styles.topAvatarButtonText}>My Interests</Text>
                     </View>
@@ -81,7 +157,11 @@ function MyAccountScreen({navigation}) {
                 <Card containerStyle={{marginTop: 20, padding: 0, width: "80%"}}>
                     {
                         list.map((item, i) => (
-                            <ListItem key={i} bottomDivider>
+                            <ListItem key={i} bottomDivider
+                                      onPress={() => {
+                                          setCurrentOverlay(item.title);
+                                          toggleOverlay();
+                                      }}>
                                 <Icon name={item.icon}/>
                                 <ListItem.Content>
                                     <ListItem.Title>{item.title}</ListItem.Title>
@@ -90,12 +170,15 @@ function MyAccountScreen({navigation}) {
                             </ListItem>
                         ))
                     }
-
                 </Card>
                 <Card containerStyle={{padding: 0, width: "80%"}}>
                     {
                         list2.map((item, i) => (
-                            <ListItem key={i} bottomDivider>
+                            <ListItem key={i} bottomDivider
+                                      onPress={() => {
+                                          setCurrentOverlay(item.title);
+                                          toggleOverlay();
+                                      }}>
                                 <ListItem.Content>
                                     <ListItem.Title>{item.title}</ListItem.Title>
                                 </ListItem.Content>
@@ -119,6 +202,17 @@ function MyAccountScreen({navigation}) {
                        source={require('../HomeStackNavigator/screens/assets/homeLogo.png')}/>
                 <Text style={{marginTop: 5, fontSize: 10}}>©2020 Secnds.com</Text>
 
+                <Overlay isVisible={isOverlayVisible} onBackdropPress={toggleOverlay}>
+                    <View style={{width: (screenWidth * 0.8), height: (screenHeight * 0.7)}}>
+                        <Avatar
+                            rounded
+                            size="medium"
+                            icon={{name: 'times-circle', type: 'font-awesome', color: "black"}}
+                            onPress={toggleOverlay}
+                        />
+                        {overlayViewElement}
+                    </View>
+                </Overlay>
             </View>
         </ScrollView>
     );
