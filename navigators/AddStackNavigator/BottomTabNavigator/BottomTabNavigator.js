@@ -1,5 +1,6 @@
 import React from "react";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
+import {createStackNavigator} from "@react-navigation/stack";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 import HomeStackNavigator from "./HomeStackNavigator/HomeStackNavigator";
@@ -7,8 +8,27 @@ import MyAccountScreen from "./screens/MyAccountScreen";
 import ModalScreen from "../screens/AddListingScreen";
 import NotificationsScreen from "./screens/NotificationsScreen";
 import SearchScreen from "./screens/SearchScreen";
+import MyOrdersScreen from "./screens/MyOrders";
+import FavouritesScreen from "./screens/FavouritesScreen";
+import MyInterestsScreen from "./screens/MyInterestsScreen";
+import MyListingsScreen from "./screens/MyListingsScreen";
 
 const Tab = createBottomTabNavigator();
+const MyAccountStack = createStackNavigator();
+
+function MyAccountStackScreen() {
+
+    return (
+        <MyAccountStack.Navigator>
+            <MyAccountStack.Screen options={{headerShown: false}} name="My Account" component={MyAccountScreen}/>
+            <MyAccountStack.Screen name="My Orders"
+                                   component={MyOrdersScreen}/>
+            <MyAccountStack.Screen name="Favourites" component={FavouritesScreen}/>
+            <MyAccountStack.Screen name="My Listings" component={MyListingsScreen}/>
+            <MyAccountStack.Screen name="My Interests" component={MyInterestsScreen}/>
+        </MyAccountStack.Navigator>
+    );
+}
 
 export default function BottomTabNavigator({navigation}) {
     return (
@@ -57,7 +77,7 @@ export default function BottomTabNavigator({navigation}) {
             />
             <Tab.Screen
                 name="My Account"
-                component={MyAccountScreen}
+                component={MyAccountStackScreen}
             />
         </Tab.Navigator>
     );
