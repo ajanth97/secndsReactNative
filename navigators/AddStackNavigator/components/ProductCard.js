@@ -3,7 +3,7 @@ import {View, Text, Image, TouchableOpacity, StyleSheet} from "react-native";
 
 export default function ProductCard({ navigation, product }) {
     return (
-        <TouchableOpacity onPress={() => navigation.navigate("Product")}>
+        <TouchableOpacity onPress={() => navigation.navigate("Product", {listingId: product.id})}>
             <View style={styles.container}>
                 <Image style={styles.image} source={product.url}/>
                 <Text style={styles.brand}>{product.brand}</Text>

@@ -1,10 +1,24 @@
 import React from "react";
 import {View, Text, Dimensions, ScrollView, Image, StyleSheet, TouchableOpacity} from "react-native";
+import { useFirestoreConnect } from "react-redux-firebase";
+import { useSelector } from 'react-redux';
 import ImageSlider from 'react-native-image-slider';
 import {Avatar, Button} from "react-native-elements";
 
-export default function ViewProduct({navigation}) {
+export default function ViewProduct({navigation, route}) {
+    const listingId =  route.params.listingId
+    useFirestoreConnect([
+        {
+          collection: 'listings',
+          doc: listingId
+        }
+      ])     
+      const listing = useSelector(
+        ({ firestore: { data } }) => data.listings && data.listings[listingId]
+      )
+    console.log(listing)  
     const windowHeight = Dimensions.get('window').height;
+    
     const images = [
         "https://digistatement.com/wp-content/uploads/2020/03/rsz_new-apple-macbook-pro-2020-700x375.jpg",
         "https://cdn.pocket-lint.com/r/s/970x/assets/images/152137-laptops-review-apple-macbook-pro-2020-review-image1-pbzm4ejvvs-jpg.webp",
@@ -23,8 +37,8 @@ export default function ViewProduct({navigation}) {
                 <View style={{flexDirection: "row", marginTop: 10}}>
                     <View style={{marginLeft: 30, marginTop: 5, width: "60%"}}>
                         <Text style={styles.brandNameText}>Apple</Text>
-                        <Text style={styles.itemNameText}>Macbook Pro 2017 13'</Text>
-                        <Text style={styles.itemPriceText}>LKR 170,000</Text>
+                        <Text style={styles.itemNameText}>{listing.title}</Text>
+                        <Text style={styles.itemPriceText}>{listing.price}</Text>
                     </View>
                     <Avatar
                         rounded
@@ -59,7 +73,7 @@ export default function ViewProduct({navigation}) {
                 <View style={styles.descriptionTagContainer}>
                     <Text style={{fontSize: 14, color: "#676767"}}>Description:</Text>
                     <View style={{height: 100}}>
-                        <Text style={styles.descriptionValue}>Space Grey, 250GB, 8GB RAM</Text>
+                        <Text style={styles.descriptionValue}>{listing.description}</Text>
                     </View>
                 </View>
 
