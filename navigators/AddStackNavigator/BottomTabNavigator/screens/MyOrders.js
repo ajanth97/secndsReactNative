@@ -59,14 +59,17 @@ function MyOrdersScreen({navigation}) {
                                         </View>
                                         <View style={{marginTop: 10, marginLeft: 20}}>
                                             <Text>{l.name}</Text>
-                                            <ListItem.Subtitle style={{fontWeight: "bold", fontSize: 14, marginTop:5, marginBottom: 5}}>{
+                                            <ListItem.Subtitle style={{
+                                                fontWeight: "bold",
+                                                fontSize: 14,
+                                                marginTop: 5,
+                                                marginBottom: 5
+                                            }}>{
                                                 l.total}
                                             </ListItem.Subtitle>
                                             <Text>Status: <Text style={{color: "green"}}>{l.status}</Text></Text>
                                         </View>
                                     </View>
-
-
                                 </ListItem.Content>
 
                             </ListItem>
