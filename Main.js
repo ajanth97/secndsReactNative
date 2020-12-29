@@ -4,7 +4,7 @@ import { StatusBar } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 
 import { LoginStackNavigator } from "./navigators/LoginStackNavigator/LoginStackNavigator";
-import AddListingStackNaviagtor from "./navigators/AddStackNavigator/AddListingStackNavigator";
+import RootStackNaviagtor from "./navigators/RootStackNavigator/RootStackNavigator";
 
 import { connect } from "react-redux";
 
@@ -24,7 +24,7 @@ function Main(props) {
   return (
     <NavigationContainer theme={MyTheme}>
       <StatusBar barStyle="dark-content" />
-      {props.loggedIn ? <AddListingStackNaviagtor /> : <LoginStackNavigator />}
+      {props.loggedIn ? <RootStackNaviagtor /> : <LoginStackNavigator />}
     </NavigationContainer>
   );
 }

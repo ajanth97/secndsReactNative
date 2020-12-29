@@ -9,7 +9,6 @@ import CardItem from "./components/CardItem";
 export default function HomeScreen(props) {
   useFirestoreConnect(["listings"]);
   const listings = useSelector((state) => state.firestore.data.listings);
-  
 
   const renderItem = ({ item }) => (
     <CardItem
