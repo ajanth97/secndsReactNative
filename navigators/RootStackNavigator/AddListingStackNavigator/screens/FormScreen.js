@@ -7,67 +7,26 @@ import Selecter from "./components/Selecter";
 import {number, string, object, reach} from "yup";
 import {Input, Layout, Button} from "@ui-kitten/components";
 import {Avatar} from "react-native-elements";
+import { Formik } from 'formik';
+
 
 export default function FormScreen({navigation}) {
-    const [form, setForm] = React.useState({});
-    const [formValid, updateFormValid] = React.useState({});
-    const [masterFormValid, updateMasterFormValid] = React.useState(false);
     const firestore = useFirestore();
 
-    //updateField
-    const updateField = (inputField, value) => {
-        setForm({...form, [inputField]: value});
-        const field = reach(listingSchema, inputField);
-        field.isValid(value).then((valid) => {
-            if (!valid) {
-                console.log("Error");
-                updateFormValid({...formValid, [inputField]: false});
-                masterValidation();
-                field.validate(value).catch((err) => {
-                    console.log(err);
-                });
-            } else {
-                updateFormValid({...formValid, [inputField]: true});
-            }
-        });
-    };
-
-    const masterValidation = () => {
-        console.log(formValid);
-        listingSchema.isValid(form).then((valid) => {
-            if (!valid) {
-                updateMasterFormValid(false);
-            } else {
-                updateMasterFormValid(true);
-            }
-        });
-    };
-
-    const getFieldStatus = (inputField) => {
-        const fieldValidity = formValid[inputField];
-        if (fieldValidity === true) {
-            return "success";
-        } else if (fieldValidity === false) {
-            return "danger";
-        } else {
-            return "";
-        }
-    };
-
     const listingSchema = object().shape({
-        title: string().required(),
-        description: string().required(),
-        price: number().required(),
+        title: string().required('Required !'),
+        description: string().required('Required !'),
+        price: number().required('Required !'),
     });
 
     //Add Listing Function
-    const addListing = () => {
+    const addListing = (values) => {
         const listing = firestore.collection("listings").doc();
         //getting the unique id of this listing
         const id = listing.id;
         console.log(id);
         listing.set({
-            ...form,
+            ...values,
             id: id,
             timestamp: firebase.firestore.FieldValue.serverTimestamp(),
         });
@@ -80,6 +39,12 @@ export default function FormScreen({navigation}) {
     return (
         <Layout style={formStyling.layoutPadding}>
             <Text style={{fontSize: 38, textAlign: "center"}}>Let's list your Item!</Text>
+            <Formik 
+                    initialValues={{ title: '', description: '', price : ''}}
+                    validationSchema={listingSchema}
+                    onSubmit={values => addListing(values)}
+            >                       
+            {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
             <Layout style={formStyling.formPadding}>
                 <Avatar
                     rounded
@@ -90,25 +55,29 @@ export default function FormScreen({navigation}) {
                 />
                 <Input
                     placeholder={"Title"}
+                    caption={touched.title ? errors.title : null}
                     style={formStyling.inputPadding}
-                    onChangeText={(value) => updateField("title", value)}
-                    status={getFieldStatus("title")}
-                    value={form.title}
+                    onChangeText={(handleChange('title'))}
+                    onBlur={handleBlur('title')}
+                    value={values.title}
                 />
                 <Input
                     multiline={true}
-                    value={form.description}
+                    value={values.description}
                     placeholder={"Description"}
-                    status={getFieldStatus("description")}
+                    caption={touched.description ? errors.description : null}
                     style={formStyling.inputPadding}
-                    onChangeText={(value) => updateField("description", value)}
+                    onChangeText={handleChange('description')}
+                    onBlur={handleBlur('description')}
                 />
                 <Input
                     placeholder={"Price"}
                     keyboardType={"numeric"}
+                    caption={touched.price ? errors.price : null}
                     style={formStyling.inputPadding}
-                    status={getFieldStatus("price")}
-                    onChangeText={(value) => updateField("price", value)}
+                    value={values.price}
+                    onChangeText={handleChange('price')}
+                    onBlur={handleBlur('price')}
                 />
 
                 <View style={{flexDirection: "row", alignSelf:"center", marginTop: 50}}>
@@ -128,12 +97,14 @@ export default function FormScreen({navigation}) {
 
                 <Button
                     style={{marginTop: 30, width:"90%", alignSelf:"center"}}
-                    onPress={() => addListing()}
-                    disabled={!masterFormValid}
+                    onPress={handleSubmit}
+                    disabled={Object.keys(errors).length === 0 ? false : true}
+                    
                 >
                     List Item
                 </Button>
-            </Layout>
+            </Layout>)}
+            </Formik>
         </Layout>
     );
 }
