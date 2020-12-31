@@ -1,11 +1,12 @@
 import React from "react";
+import {Button} from "react-native"
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import {createStackNavigator} from "@react-navigation/stack";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 import HomeStackNavigator from "./HomeStackNavigator/HomeStackNavigator";
 import MyAccountScreen from "./screens/MyAccountScreen";
-import ModalScreen from "../screens/AddListingScreen";
+import AddListingScreen from "../screens/AddListingScreen";
 import NotificationsScreen from "./screens/NotificationsScreen";
 import SearchScreen from "./screens/SearchScreen";
 import MyOrdersScreen from "./screens/MyOrders";
@@ -69,7 +70,15 @@ export default function BottomTabNavigator({navigation}) {
             />
             <Tab.Screen
                 name="Add"
-                component={ModalScreen}
+                component={AddListingScreen}
+                options={{
+                    tabBarButton: () => (
+                      <Button
+                        title="Add"
+                        onPress={() => navigation.navigate("AddListing")}
+                      />
+                    ),
+                  }}
             />
             <Tab.Screen
                 name="Notifications"

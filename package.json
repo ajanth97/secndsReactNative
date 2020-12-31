@@ -15,22 +15,22 @@
     "@react-navigation/stack": "^5.9.0",
     "@ui-kitten/components": "^5.0.0",
     "@webileapps/react-native-banner-carousel": "^1.0.4",
-    "expo": "^39.0.5",
-    "expo-camera": "~9.0.0",
+    "expo": "^40.0.0",
+    "expo-camera": "^9.1.1",
     "expo-google-app-auth": "^8.1.2",
     "expo-status-bar": "~1.0.2",
     "firebase": "8.0.1",
+    "formik": "^2.2.6",
     "native-base": "^2.13.14",
     "react": "16.13.1",
     "react-dom": "16.13.1",
-    "react-hook-form": "^6.8.6",
     "react-native": "https://github.com/expo/react-native/archive/sdk-39.0.3.tar.gz",
     "react-native-elements": "^3.0.0-alpha.1",
-    "react-native-gesture-handler": "~1.7.0",
+    "react-native-gesture-handler": "^1.9.0",
     "react-native-image-slider": "^2.0.3",
     "react-native-reanimated": "~1.13.0",
-    "react-native-safe-area-context": "3.1.4",
-    "react-native-screens": "~2.10.1",
+    "react-native-safe-area-context": "^3.1.9",
+    "react-native-screens": "^2.16.1",
     "react-native-svg": "12.1.0",
     "react-native-web": "~0.13.7",
     "react-redux": "^7.2.1",
@@ -41,8 +41,8 @@
     "yup": "^0.29.3"
   },
   "devDependencies": {
-    "@babel/core": "^7.8.6",
-    "babel-preset-expo": "^8.3.0"
+    "@babel/core": "~7.9.0",
+    "babel-preset-expo": "8.3.0"
   },
   "private": true
 }

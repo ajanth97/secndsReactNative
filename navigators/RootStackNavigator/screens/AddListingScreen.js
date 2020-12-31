@@ -8,7 +8,7 @@ import {number, string, object, reach} from "yup";
 import {Input, Layout, Button} from "@ui-kitten/components";
 import {Avatar} from "react-native-elements";
 
-export default function ModalScreen({navigation}) {
+export default function AddListingScreen({navigation}) {
     const [form, setForm] = React.useState({});
     const [formValid, updateFormValid] = React.useState({});
     const [masterFormValid, updateMasterFormValid] = React.useState(false);
