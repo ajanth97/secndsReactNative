@@ -16,24 +16,18 @@ export default function CategoryCard({ navigation, category }) {
 const styles = StyleSheet.create({
     categoryCardView: {
         marginVertical: 10,
-        marginHorizontal: 10,
+        marginHorizontal: 5,
         alignItems: "center",
         backgroundColor: 'white',
-        borderRadius: 5,
-        shadowColor: "black",
-        shadowOffset: {width: 1, height: 1},
-        shadowOpacity: 0.2
     },
     categoryImage: {
-        width: 120,
-        height: 90,
+        width: 140,
+        height: 140,
         borderRadius: 5,
-        borderBottomLeftRadius: 0,
-        borderBottomRightRadius: 0,
         shadowOpacity: 1,
     },
     categoryText: {
-        color: "#676767",
+        color: "black",
         marginVertical: 7
     }
 });
