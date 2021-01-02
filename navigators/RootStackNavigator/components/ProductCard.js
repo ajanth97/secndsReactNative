@@ -17,7 +17,7 @@ export default function ProductCard({ navigation, product }) {
 const styles = StyleSheet.create({
     image: {
         width: 110,
-        height: 80,
+        height: 110,
         borderRadius: 5,
         borderBottomRightRadius: 0,
         borderBottomLeftRadius: 0,
@@ -27,7 +27,9 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         paddingBottom: 10,
         paddingTop: 3,
-        fontSize: 12
+        fontSize: 12,
+        color:"#fe7571",
+        opacity:1
     },
     container: {
         marginLeft: 11,
@@ -45,6 +47,7 @@ const styles = StyleSheet.create({
         marginTop: 5
     },
     itemName: {
-        fontSize: 14
+        fontSize: 14,
+        fontWeight: "500"
     },
 });

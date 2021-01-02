@@ -23,13 +23,15 @@ const styles = StyleSheet.create({
     priceLabelView: {
         top: -18,
         left: 9,
-        backgroundColor: "black",
+        backgroundColor:"white",
         width: 75,
-        opacity: 0.7
+        borderRadius: 3,
+        opacity:0.9
     },
     priceText: {
         paddingLeft: 10,
-        color: "white",
-        fontSize: 12
+        color: "#fe7571",
+        fontSize: 12,
+        fontWeight:"bold"
     }
 });
