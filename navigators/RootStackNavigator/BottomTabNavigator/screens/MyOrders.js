@@ -1,6 +1,6 @@
 import React from "react";
 import {Icon, ListItem} from 'react-native-elements'
-import {View, Text, ScrollView, Dimensions, Image} from "react-native";
+import {View, Text, ScrollView, Dimensions, Image, TouchableOpacity} from "react-native";
 
 const screenHeight = Dimensions.get('window').height;
 const screenWidth = Dimensions.get('window').width;
@@ -48,7 +48,9 @@ function MyOrdersScreen({navigation}) {
                 <View>
                     {
                         orderArr.map((l, i) => (
+
                             <ListItem key={i} bottomDivider>
+                                <TouchableOpacity onPress={()=> navigation.navigate("Order Detail")} style={{width:"100%"}}>
                                 <ListItem.Content>
                                     <Text>Order ID: <ListItem.Title>{l.orderId}</ListItem.Title></Text>
                                     <Text>Ordered Date: {l.orderDate}</Text>
@@ -71,7 +73,7 @@ function MyOrdersScreen({navigation}) {
                                         </View>
                                     </View>
                                 </ListItem.Content>
-                                <Icon name="delete" color={"red"}/>
+                                </TouchableOpacity>
                             </ListItem>
                         ))
                     }
