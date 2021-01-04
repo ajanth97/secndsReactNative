@@ -1,5 +1,4 @@
 import React from "react";
-import {Button} from "react-native"
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import {createStackNavigator} from "@react-navigation/stack";
 import Ionicons from "react-native-vector-icons/Ionicons";
@@ -13,6 +12,8 @@ import MyOrdersScreen from "./screens/MyOrders";
 import FavouritesScreen from "./screens/FavouritesScreen";
 import MyInterestsScreen from "./screens/MyInterestsScreen";
 import MyListingsScreen from "./screens/MyListingsScreen";
+import OrderDetailScreen from "./screens/OrderDetail";
+import {Avatar} from "react-native-elements";
 
 const Tab = createBottomTabNavigator();
 const MyAccountStack = createStackNavigator();
@@ -22,11 +23,11 @@ function MyAccountStackScreen() {
     return (
         <MyAccountStack.Navigator>
             <MyAccountStack.Screen options={{headerShown: false}} name="My Account" component={MyAccountScreen}/>
-            <MyAccountStack.Screen name="My Orders"
-                                   component={MyOrdersScreen}/>
+            <MyAccountStack.Screen name="My Orders" component={MyOrdersScreen}/>
             <MyAccountStack.Screen name="Favourites" component={FavouritesScreen}/>
             <MyAccountStack.Screen name="My Listings" component={MyListingsScreen}/>
             <MyAccountStack.Screen name="My Interests" component={MyInterestsScreen}/>
+            <MyAccountStack.Screen name="Order Detail" component={OrderDetailScreen}/>
         </MyAccountStack.Navigator>
     );
 }
@@ -73,12 +74,13 @@ export default function BottomTabNavigator({navigation}) {
                 component={AddListingScreen}
                 options={{
                     tabBarButton: () => (
-                      <Button
-                        title="Add"
-                        onPress={() => navigation.navigate("AddListing")}
-                      />
+                        <Avatar
+                            size="medium"
+                            icon={{name: 'plus-circle', type: 'font-awesome', color: "gray"}}
+                            onPress={() => navigation.navigate("AddListing")}>
+                        </Avatar>
                     ),
-                  }}
+                }}
             />
             <Tab.Screen
                 name="Notifications"
