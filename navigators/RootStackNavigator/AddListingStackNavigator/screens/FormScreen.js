@@ -1,42 +1,127 @@
-import React from "react";
-import {View, Text, StyleSheet} from "react-native";
+import React, {useState, useEffect} from "react";
+import {View, Text, StyleSheet, Image, ScrollView} from "react-native";
 import Constants from "expo-constants";
-import {useFirestore} from "react-redux-firebase";
+import {useFirestore, useFirebase} from "react-redux-firebase";
 import firebase from "firebase";
 import Selecter from "./components/Selecter";
 import {number, string, object, reach} from "yup";
 import {Input, Layout, Button} from "@ui-kitten/components";
 import {Avatar} from "react-native-elements";
 import { Formik } from 'formik';
+import * as ImagePicker from 'expo-image-picker';
+
 
 
 export default function FormScreen({navigation}) {
     const firestore = useFirestore();
-
+    const firebase = useFirebase();    
+    const [image, setImage] = useState(null);
+    const [listing, setListing] = useState(firestore.collection("listings").doc())
+    const [imageNumber, setImageNumber] = useState(1);
+    const [imageRef, setImageRef] = useState([]);
+    
     const listingSchema = object().shape({
         title: string().required('Required !'),
         description: string().required('Required !'),
         price: number().required('Required !'),
     });
 
+    console.log(listing.id);
+
     //Add Listing Function
     const addListing = (values) => {
-        const listing = firestore.collection("listings").doc();
-        //getting the unique id of this listing
-        const id = listing.id;
-        console.log(id);
+        //getting the unique id of this listing        
+        console.log(listing.id);
+        /*uploadImage(image)*/
         listing.set({
             ...values,
-            id: id,
+            id: listing.id,
             timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+            listingImages: imageRef
         });
         return navigation.navigate("Main");
     };
 
+    
+    
+    
+    //Upload Image
+    uploadImage = async (uri) => {
+        const response = await fetch(uri);
+        const blob = await response.blob();
+        const storageRef = firebase.storage().ref('Listing images/' + listing.id);           
+        setImageNumber(imageNumber + 1);
+        const imagePath = '/' + listing.id + '_' + imageNumber
+        const listingImageRef = storageRef.child(imagePath);
+        const task = listingImageRef.put(blob);
+        task.on('state_changed', function(snapshot){
+            // Observe state change events such as progress, pause, and resume
+            // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+            var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            console.log('Upload is ' + progress + '% done');
+            switch (snapshot.state) {
+              case firebase.storage.TaskState.PAUSED: // or 'paused'
+                console.log('Upload is paused');
+                break;
+              case firebase.storage.TaskState.RUNNING: // or 'running'
+                console.log('Upload is running');
+                break;
+            }
+          }, function(error) {
+            // Handle unsuccessful uploads
+            console.log("Upload Unsuccessful")
+          }, function() {
+            // Upload completed successfully, now we can get the download URL
+                task.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+                console.log('File available at', downloadURL);
+                setImageRef([...imageRef, downloadURL]);
+                console.log("Upload Success");
+            });
+        }); 
+    }
+
+    useEffect(() => {
+        console.log(imageRef)
+    }, [imageRef])
+
+    useEffect(() => {
+        console.log(image)   
+    }, [image])
+
     const category = ["Fashion", "Electronics", "Household", "Other"];
     const condition = ["Brand New", "Re-conditioned", "Used"];
 
+    useEffect(() => {
+        (async () => {
+          if (Platform.OS !== 'web') {
+            const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+            if (status !== 'granted') {
+              alert('Sorry, we need camera roll permissions to make this work!');
+            }
+          }
+        })();
+      }, []);
+    
+      const pickImage = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+          mediaTypes: ImagePicker.MediaTypeOptions.Images,
+          allowsEditing: true,
+          allowsMultipleSelection:true,
+          base64: false,
+          aspect: [4, 3],
+          quality: 1,
+        });
+    
+    
+        if (!result.cancelled) {
+          setImage(result.uri);
+          uploadImage(result.uri);
+        }
+      };
+
     return (
+        <View>
+        <ScrollView>
         <Layout style={formStyling.layoutPadding}>
             <Text style={{fontSize: 38, textAlign: "center"}}>Let's list your Item!</Text>
             <Formik 
@@ -46,6 +131,7 @@ export default function FormScreen({navigation}) {
             >                       
             {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
             <Layout style={formStyling.formPadding}>
+                <Button onPress={() => navigation.goBack()}>Close</Button>
                 <Avatar
                     rounded
                     size="large"
@@ -53,6 +139,11 @@ export default function FormScreen({navigation}) {
                     activeOpacity={0.7}
                     onPress={() => navigation.navigate("Camera")}
                 />
+                {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
+                <Text>{}</Text>
+                <View style={{paddingBottom: 10}}>
+                    <Button onPress={pickImage}>Gallery</Button>
+                </View>
                 <Input
                     placeholder={"Title"}
                     caption={touched.title ? errors.title : null}
@@ -106,6 +197,8 @@ export default function FormScreen({navigation}) {
             </Layout>)}
             </Formik>
         </Layout>
+        </ScrollView>
+        </View>
     );
 }
 
