@@ -19,12 +19,8 @@ export default function ViewProduct({navigation, route}) {
     console.log(listing)  
     const windowHeight = Dimensions.get('window').height;
     
-    const images = [
-        "https://digistatement.com/wp-content/uploads/2020/03/rsz_new-apple-macbook-pro-2020-700x375.jpg",
-        "https://cdn.pocket-lint.com/r/s/970x/assets/images/152137-laptops-review-apple-macbook-pro-2020-review-image1-pbzm4ejvvs-jpg.webp",
-        "https://digistatement.com/wp-content/uploads/2020/03/rsz_new-apple-macbook-pro-2020-700x375.jpg",
-        "https://cdn.pocket-lint.com/r/s/970x/assets/images/152137-laptops-review-apple-macbook-pro-2020-review-image1-pbzm4ejvvs-jpg.webp"
-    ];
+
+    const images = listing.listingImages    
 
     return (
         <View style={{backgroundColor: "#F6F7F7", height: windowHeight}}>
