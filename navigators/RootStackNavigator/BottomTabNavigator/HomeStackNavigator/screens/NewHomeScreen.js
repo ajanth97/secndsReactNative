@@ -32,6 +32,7 @@ function NewHomeScreen({navigation}) {
     const [cartTotal, setCartTotal] = React.useState(8000);
     const [noOfCartItems, setNoOfCartItems] = React.useState(2);
     const listings = useSelector((state) => state.firestore.data.listings);
+    console.log(listings);
 
     function Cart() {
         if (isCartVisible) {
@@ -156,9 +157,9 @@ function NewHomeScreen({navigation}) {
 
                             <ScrollView horizontal={true} style={{marginTop: 10}}>
                                 {
-                                    electronicsArr.map((item, i) => (
+                                    Object.values(listings).map((item) => (
                                         <ProductCard
-                                            key={i}
+                                            key={item.id}
                                             navigation={navigation}
                                             product={item}
                                         />

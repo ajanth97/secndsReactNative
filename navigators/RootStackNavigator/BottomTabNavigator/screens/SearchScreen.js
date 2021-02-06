@@ -11,6 +11,7 @@ const categoryArr = [
     {image: require('../HomeStackNavigator/screens/assets/6.png'), name: "Electronics"},
     {image: require('../HomeStackNavigator/screens/assets/6.png'), name: "Electronics"},
     {image: require('../HomeStackNavigator/screens/assets/6.png'), name: "Electronics"},
+
 ];
 
 function SearchScreen({navigation}) {
@@ -111,6 +112,7 @@ function SearchScreen({navigation}) {
 
 const styles = StyleSheet.create({
     categoryTitle: {
+        // paddingHorizontal: 20,
         paddingVertical: 5,
         fontSize: 16,
         fontWeight: "600",

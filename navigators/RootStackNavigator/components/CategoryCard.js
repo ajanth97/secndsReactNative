@@ -19,6 +19,10 @@ const styles = StyleSheet.create({
         marginHorizontal: 5,
         alignItems: "center",
         backgroundColor: 'white',
+        // borderRadius: 5,
+        // shadowColor: "black",
+        // shadowOffset: {width: 1, height: 1},
+        // shadowOpacity: 0.2
     },
     categoryImage: {
         width: 140,

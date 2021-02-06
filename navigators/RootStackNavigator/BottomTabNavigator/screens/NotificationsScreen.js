@@ -1,5 +1,5 @@
 import React from "react";
-import {View, Text, ScrollView} from "react-native";
+import {View, Text} from "react-native";
 import {Avatar, ListItem} from "react-native-elements";
 
 function NotificationsScreen({navigation}) {
@@ -11,17 +11,10 @@ function NotificationsScreen({navigation}) {
             message: "You have added Item #234 to your Cart. You have 30 minutes to Checkout!",
             icon: 'payment'
         },
-        {title: 'Payment Successful!', message: 'We have received your payment for Order #8034', icon: 'settings'},
-        {title: 'Your Order is placed', message: 'The Order #8034 is confirmed.', icon: 'local-shipping'},
-        {
-            title: 'Only 30 minutes to Check out!',
-            message: "You have added Item #234 to your Cart. You have 30 minutes to Checkout!",
-            icon: 'payment'
-        },
     ];
 
     return (
-        <ScrollView style={{flex: 1}}>
+        <View style={{flex: 1, alignItems: "center"}}>
             <Text style={{
                 alignSelf: "flex-start",
                 marginLeft: 20,
@@ -66,7 +59,7 @@ function NotificationsScreen({navigation}) {
                     ))
                 }
             </View>
-        </ScrollView>
+        </View>
 
     );
 }

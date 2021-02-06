@@ -1,14 +1,14 @@
 {
   "expo": {
-    "name": "ex",
-    "slug": "ex",
+    "name": "Secnds",
+    "slug": "Secnds",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/icon-secnds.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/splash1.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#4f3098"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -17,7 +17,13 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": false,
+      "bundleIdentifier": "com.secnds.secndsapp",
+      "buildNumber": "0.0.1"
+    },
+    "android": {
+      "package": "com.secnds.secndsapp",
+      "versionCode": 1
     },
     "web": {
       "favicon": "./assets/favicon.png"
