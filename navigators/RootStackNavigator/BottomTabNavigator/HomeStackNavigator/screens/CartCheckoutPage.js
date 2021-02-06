@@ -242,7 +242,7 @@ function CartCheckoutScreen({navigation}) {
                 alignItems: "center", alignContent:"center",width: "90%", backgroundColor: "#4f3098",
                 height: 50, borderRadius: 50, position: "absolute", top: screenHeight - 235, zIndex: 1000
             }}>
-                    <Text style={{color: "white", fontSize: 18, marginTop:13}}>Confirm and Pay</Text>
+                <Text style={{color: "white", fontSize: 18, marginTop:13}}>Confirm and Pay</Text>
             </View>
 
             <Overlay isVisible={isOverlayVisible} onBackdropPress={toggleOverlay}>

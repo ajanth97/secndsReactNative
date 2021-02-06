@@ -1,16 +1,17 @@
-import React, {useState, useEffect} from "react";
+import React from "react";
 import {View, Text, Image, TouchableOpacity, StyleSheet} from "react-native";
-import {useFirebase} from "react-redux-firebase";
 
-export default function ProductCard({navigation, product }) {
-    const firebase = useFirebase();
+export default function ProductCard({ navigation, product }) {
     return (
         <TouchableOpacity onPress={() => navigation.navigate("Product", {listingId: product.id})}>
             <View style={styles.container}>
-                <Image  style={styles.image} source={{uri: product.listingImages[0]}} />
-                <Text style={styles.brand}>{product.brand} Brand</Text>
+                <Image style={styles.image} source={{uri: product.listingImages[0]}}/>
+                <View style={{position:"absolute", right:1, paddingLeft:10, backgroundColor:"white",
+                    borderRadius:10}}>
+                    <Text style={styles.price}>LKR {product.price}</Text>
+                </View>
+                <Text style={styles.brand}>{product.brand}Brand</Text>
                 <Text style={styles.itemName}>{product.title}</Text>
-                <Text style={styles.price}>LKR {product.price}</Text>
             </View>
         </TouchableOpacity>
     );
@@ -30,7 +31,9 @@ const styles = StyleSheet.create({
         paddingBottom: 10,
         paddingTop: 3,
         fontSize: 12,
-        color:"#fe7571",
+        backgroundColor: "white",
+        height:25,
+        color:"black",
         opacity:1
     },
     container: {
@@ -50,6 +53,7 @@ const styles = StyleSheet.create({
     },
     itemName: {
         fontSize: 14,
-        fontWeight: "500"
+        fontWeight: "500",
+        marginBottom: 5
     },
 });

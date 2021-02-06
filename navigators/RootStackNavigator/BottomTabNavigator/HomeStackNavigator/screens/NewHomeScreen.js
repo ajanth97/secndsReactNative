@@ -155,17 +155,17 @@ function NewHomeScreen({navigation}) {
                                 <Text style={styles.dealCategorySeeAll}>See All</Text>
                             </View>
 
-                            {/*<ScrollView horizontal={true} style={{marginTop: 10}}>*/}
-                            {/*    {*/}
-                            {/*        electronicsArr.map((item, i) => (*/}
-                            {/*            <ProductCard*/}
-                            {/*                key={i}*/}
-                            {/*                navigation={navigation}*/}
-                            {/*                product={item}*/}
-                            {/*            />*/}
-                            {/*        ))*/}
-                            {/*    }*/}
-                            {/*</ScrollView>*/}
+                            <ScrollView horizontal={true} style={{marginTop: 10}}>
+                                {
+                                    Object.values(listings).map((item) => (
+                                        <ProductCard
+                                            key={item.id}
+                                            navigation={navigation}
+                                            product={item}
+                                        />
+                                    ))
+                                }
+                            </ScrollView>
                         </View>
                     </View>)}
             </ScrollView>
