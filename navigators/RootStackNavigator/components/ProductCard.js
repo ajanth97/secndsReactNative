@@ -2,25 +2,14 @@ import React, {useState, useEffect} from "react";
 import {View, Text, Image, TouchableOpacity, StyleSheet} from "react-native";
 import {useFirebase} from "react-redux-firebase";
 
-export default function ProductCard({ navigation, product }) {
+export default function ProductCard({navigation, product }) {
     const firebase = useFirebase();
-    const listingImages = product.listingImages;
-    const thumbnailFunction = () => {
-        if (listingImages === undefined){
-            return ""
-        }
-        else{
-            return listingImages[0]
-        }
-    }
-    const thumbnail = thumbnailFunction();
-    console.log(thumbnail);
     return (
         <TouchableOpacity onPress={() => navigation.navigate("Product", {listingId: product.id})}>
             <View style={styles.container}>
-                <Image  style={styles.image} source={thumbnail} resizeMode={"contain"}/>
-                <Text style={styles.brand}>{product.brand}</Text>
-                <Text style={styles.itemName}>{product.name}</Text>
+                <Image  style={styles.image} source={{uri: product.listingImages[0]}} />
+                <Text style={styles.brand}>{product.brand} Brand</Text>
+                <Text style={styles.itemName}>{product.title}</Text>
                 <Text style={styles.price}>LKR {product.price}</Text>
             </View>
         </TouchableOpacity>
